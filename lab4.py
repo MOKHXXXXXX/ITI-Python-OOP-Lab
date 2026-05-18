@@ -44,8 +44,8 @@ class Person:
 class Car:
     def __init__(self, name, fuelRate, velocity):
         self.name = name
-        self.fuelRate = fuelRate  # 0 to 100 [cite: 90]
-        self.velocity = velocity  # 0 to 200 [cite: 89]
+        self.fuelRate = fuelRate 
+        self.velocity = velocity 
 
     @property
     def fuelRate(self):
@@ -53,11 +53,10 @@ class Car:
 
     @fuelRate.setter
     def fuelRate(self, value):
-        # تم الإصلاح هنا: استخدام _fuelRate بدلاً من _healthRate المخطوءة
         if 0 <= value <= 100:
             self._fuelRate = value
         else:
-            self._fuelRate = max(0, min(value, 100))  # Clamp value between 0 and 100 [cite: 90]
+            self._fuelRate = max(0, min(value, 100))  
 
     @property
     def velocity(self):
@@ -70,23 +69,19 @@ class Car:
         else:
             raise ValueError("Velocity must be between 0 and 200.")
 
-    # Run method
     def run(self, velocity, distance):
         self.velocity = velocity
-        # Fuel consumption: decreases by 10% every 10km (1% per 1km) [cite: 29]
         fuel_needed = distance * 1.0  
         
         if self.fuelRate >= fuel_needed:
             self.fuelRate -= fuel_needed
             self.stop(remain_distance=0)
         else:
-            # Out of gas scenario [cite: 86]
             covered_distance = self.fuelRate
             remain_distance = distance - covered_distance
             self.fuelRate = 0
             self.stop(remain_distance=remain_distance)
 
-    # Stop method
     def stop(self, remain_distance=0):
         self.velocity = 0
         if remain_distance == 0:
@@ -204,12 +199,9 @@ class Office:
         arrival_time = moveHour + (distance / velocity)
         return arrival_time > targetHour
 
-    # Check lateness and apply reward/deduction
     def check_lateness(self, empId, moveHour):
         emp = self.get_employee(empId) 
         if emp:
-            # Target hour is 9:00 AM [cite: 27]
-            # إذا كانت سرعة السيارة 0 (لأنها توقفت)، نستخدم سرعة الرحلة الافتراضية المذكورة في الاسكريبت (مثلاً 40 أو 60) لتجنب القسمة على صفر
             trip_velocity = emp.car.velocity if (emp.car and emp.car.velocity > 0) else 40
             
             is_late = Office.calculate_lateness(9, moveHour, emp.distanceToWork, trip_velocity) 
