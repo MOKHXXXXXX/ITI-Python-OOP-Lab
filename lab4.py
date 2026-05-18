@@ -144,7 +144,7 @@ class Employee(Person):
 
     def send_mail(self, to, subject, msg, receiver_name):
         email_content = f"From: {self.email}\nTo: {to}\n\nHi, {receiver_name}\n{msg}\nthanks\n{subject}"
-        with open("email_composer.txt", "w", encoding="utf-8") as f:
+        with open("email.txt", "w", encoding="utf-8") as f:
             f.write(email_content)
         print("Email file generated successfully as 'email_composer.txt'.")
 
