@@ -1,0 +1,20 @@
+{
+    "office_name": "ITI Smart Village Office",
+    "total_employees_count": 1,
+    "employees": [
+        {
+            "id": 1,
+            "name": "Samy",
+            "email": "samy@iti.gov.eg",
+            "salary": 5010,
+            "mood": "happy",
+            "health_rate": 100,
+            "money": 500,
+            "car": {
+                "name": "Fiat 128",
+                "fuel_rate": 40.0,
+                "velocity": 0
+            }
+        }
+    ]
+}
